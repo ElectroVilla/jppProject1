@@ -1,0 +1,60 @@
+{
+    "name": "e_commerce",
+    "version": "1.0.0",
+    "description": "A generic E-commerce platform, designed following the JPP program requirements",
+    "main": "server.js",
+    "scripts": {
+        "start": "node build/server.js",
+        "start_local": "set ENV=1 && npx tsc && node build/server.js",
+        "st": "set ENV=2 && npx tsc && node build/server.js",
+        "watch": "nodemon src/server.ts",
+        "build": "npx tsc",
+        "test": "set ENV=2 && db-migrate --env test up && npx tsc && jasmine && db-migrate --env test --count 5 down"
+    },
+    "keywords": [
+        "ecommerce",
+        "jpp"
+    ],
+    "author": "Mina Anton",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/bcrypt": "^5.0.0",
+        "@types/cors": "^2.8.12",
+        "@types/dotenv": "^8.2.0",
+        "@types/express": "^4.17.13",
+        "@types/helmet": "^4.0.0",
+        "@types/jasmine": "^4.0.2",
+        "@types/jsonwebtoken": "^8.5.8",
+        "@types/morgan": "^1.9.3",
+        "@types/nodemailer": "^6.4.4",
+        "@types/pg": "^8.6.5",
+        "@types/supertest": "^2.0.12",
+        "@types/twilio": "^3.19.3",
+        "jasmine": "^4.0.2",
+        "jasmine-spec-reporter": "^7.0.0",
+        "jasmine-ts": "^0.4.0",
+        "node": "^17.7.2",
+        "nodemon": "^2.0.15",
+        "ts-node": "^10.7.0",
+        "tsc-watch": "^5.0.2",
+        "typescript": "^4.6.3"
+    },
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "body-parser": "^1.20.0",
+        "cors": "^2.8.5",
+        "db-migrate": "^0.11.13",
+        "db-migrate-pg": "^1.2.2",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "express-rate-limit": "^6.3.0",
+        "helmet": "^5.0.2",
+        "jsonwebtoken": "^8.5.1",
+        "morgan": "^1.10.0",
+        "nodemailer": "^6.7.3",
+        "pg": "^8.7.3",
+        "supertest": "^6.2.2",
+        "twilio": "^3.76.1",
+        "wbm": "^1.1.16"
+    }
+}
