@@ -1,6 +1,8 @@
 import client from "../database";
 import bcrypt from 'bcrypt'
 import jwt, { Secret } from 'jsonwebtoken'
+import { storeStore } from "./store";
+import {Orders} from '../models/orders'
 
 export type User = {
     id: number;
@@ -15,9 +17,9 @@ export type User = {
     status: number;
 }
 const pepper = process.env.PEPPER
-
+const store = new storeStore()
 export class UsersStore{
-    async authenticate(email:string, password:string):Promise<{token:string, user:User} | null>{
+    async authenticate(email:string, password:string):Promise<{token:string, user:User, order:Orders} | null>{
         const conn = await client.connect()
         const sql = 'SELECT * FROM users WHERE email=($1) LIMIT 1;'
         const result = await conn.query(sql, [email])
@@ -25,7 +27,8 @@ export class UsersStore{
             const user = result.rows[0]
             if (bcrypt.compareSync(password+pepper, user.password)) {
                 const token = jwt.sign({user: user}, process.env.TOKEN_SECRET as Secret)
-                return {token:token, user:user}
+                const order = await store.getOrderId(user.id)
+                return {token:token, user:user, order:order}
             }
         }
         return null

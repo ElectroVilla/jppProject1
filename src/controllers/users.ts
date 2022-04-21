@@ -88,8 +88,8 @@ export const authenticate = async (req: express.Request, res: express.Response) 
     const email = req.body.email
     const password = req.body.pw
     try {
-        const updated = await users.authenticate(email, password)   
-        res.json(updated)
+        const auth = await users.authenticate(email, password)   
+        res.json(auth)
     } catch (err) {
         res.status(400)
         res.json(err)

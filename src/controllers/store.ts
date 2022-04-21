@@ -26,3 +26,15 @@ export const cartproduct = async (req: express.Request, res: express.Response):P
         res.json(err)
     }
 }
+
+export const orderCartPost = async (req: express.Request, res: express.Response):Promise<void> => {
+    const uid = parseInt(req.body.uid)
+    try {
+        console.log(uid)
+        const result = await func.orderCartPost(uid) 
+        res.json(result)
+    } catch (err) {
+        res.status(400)
+        res.json(err)
+    }
+}

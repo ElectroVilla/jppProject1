@@ -50,41 +50,32 @@ export class storeStore{
             throw new Error(`Could not find record. Error: ${err}`)
         }
     }
-
-    // async whatsapp(phone:string, message:string): Promise<void>{
-    //     try {
-    //         await wbm.send(phone, message)
-    //         await wbm.end
-    //     } catch (err) {
-    //         throw new Error(`Could not find record. Error: ${err}`)
-    //     }
-    // }
     
-    async orderCartPost(userid: number): Promise<{order:Orders, cart:cartItems[]} | null>{
+    async orderCartPost(userid: number): Promise<{order:Orders, cart:cartItems[], newCart:Orders} | null>{
         try {
             let order:Orders
             const sql = 'SELECT * FROM orders WHERE status=0 and userid=($1);'
             const conn = await client.connect()
-            const result = await conn.query(sql)
+            const result = await conn.query(sql, [userid])
             if (result.rows.length) {
-                order = result.rows[0]
-
-
-                const cart = result.rows[0]
-                const oid = order['id']
+                const oldOrder = result.rows[0]
+                const oid = oldOrder['id']
+                let sql = 'UPDATE orders SET status=1 WHERE id=$1 RETURNING *;'
+                const sqlOrder = await conn.query(sql, [oid])
+                order = sqlOrder.rows[0]
+                sql = 'SELECT * FROM cart_items WHERE orderid=($1);'
+                const res = await conn.query(sql, [oid])
+                const cart = res.rows
+                const newCart = await this.getOrderId(userid)
                 conn.release()
-                return {order, cart}
+                return {order, cart, newCart}
             }else{
+                conn.release()
+                console.log("No order found")
                 return null
             }
-            // const order = await this.getOrderId(userid)
-            // const oid = order['id']
-            // const sql = 'INSERT INTO cart_items (qty, productid, orderid) VALUES($1, $2, $3) RETURNING *;'
-            // const result = await conn.query(sql, [qty, productid, oid])
-            
-            
-            
         } catch (err) {
+            console.log("Error : " + err)
             throw new Error(`Could not find record. Error: ${err}`)
         }
     }

@@ -9,7 +9,7 @@ import errorMiddleware from './middleware/error.middleware'
 import routes from './routes'
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: '*',
     optionsSuccessStatus: 200
 }
 dotenv.config()

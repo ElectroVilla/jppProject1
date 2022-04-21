@@ -7,5 +7,6 @@ const routes = Router()
 // api/store
 routes.route('/ordercart/:id').get(verifyAuthToken, controllers.ordercart)
 routes.route('/cartproduct').post(verifyAuthToken, controllers.cartproduct)
+routes.route('/orderCartPost').post(verifyAuthToken, controllers.orderCartPost)
 
 export default routes
