@@ -11,21 +11,21 @@ const en2 = 2 //"test"
 //psql -U postgres -h localhost -W
 if (environment === 1) {// "dev"
     console.log('Loading Dev Data')
-    client = new Pool ({
-        host: POSTGRES_HOST,
-        database: POSTGRES_DB,
-        user: POSTGRES_USER,
-        password:POSTGRES_PASSWORD,
-    })   
     // client = new Pool ({
-    //     host: HEROKU_HOST,
-    //     database: HEROKU_DB,
-    //     user: HEROKU_USER,
-    //     password:HEROKU_PASSWORD,
-    //     ssl: {
-    //         rejectUnauthorized: false
-    //     }
-    // })         
+    //     host: POSTGRES_HOST,
+    //     database: POSTGRES_DB,
+    //     user: POSTGRES_USER,
+    //     password:POSTGRES_PASSWORD,
+    // })   
+    client = new Pool ({
+        host: HEROKU_HOST,
+        database: HEROKU_DB,
+        user: HEROKU_USER,
+        password:HEROKU_PASSWORD,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    })         
 }else{// "test"
     console.log('Loading Test Data')
     client = new Pool ({
