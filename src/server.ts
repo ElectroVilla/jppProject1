@@ -8,7 +8,7 @@ import bodyParser from 'body-parser'
 import errorMiddleware from './middleware/error.middleware'
 import routes from './routes'
 
-const corsOptions = {
+const corsOptions = {// Updated to fix cors error
     origin: '*',
     optionsSuccessStatus: 200
 }
