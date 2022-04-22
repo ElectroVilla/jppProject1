@@ -25,7 +25,7 @@ export const create = async (req: express.Request, res: express.Response) => {
         const newItem: Coupons = {
             name: req.body.name,
             available: req.body.available,
-            validtille: req.body.validtille,
+            validtille: req.body.validtill,
             discounttype: req.body.discounttype,
             discountvalue: req.body.discountvalue,
             minorder: req.body.minorder,
@@ -54,7 +54,7 @@ export const update = async (req: express.Request, res: express.Response) => {
         id: parseInt(req.params.id), 
         name: req.body.name,
         available: req.body.available,
-        validtille: req.body.validtille,
+        validtille: req.body.validtill,
         discounttype: req.body.discounttype,
         discountvalue: req.body.discountvalue,
         minorder: req.body.minorder

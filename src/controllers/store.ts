@@ -38,3 +38,52 @@ export const orderCartPost = async (req: express.Request, res: express.Response)
         res.json(err)
     }
 }
+
+export const admin = async (req: express.Request, res: express.Response):Promise<void> => {
+    try {
+        const result = await func.getAdmin()
+        res.json(result)
+    } catch (err) {
+        res.status(400)
+        res.json(err)
+    }
+}
+
+export const search = async (req: express.Request, res: express.Response):Promise<void> => {
+    const key = req.body.key
+    try {
+        const result = await func.search(key)
+        res.json(result)
+    } catch (err) {
+        res.status(400)
+        res.json(err)
+    }
+}
+
+export const orderProduct = async (req: express.Request, res: express.Response):Promise<void> => {
+    const pid = req.body.pid
+    const uid = req.body.uid
+    const qty = req.body.qty
+    try {
+        const result = await func.orderProducts(pid, qty, uid)
+        res.json(result)
+    } catch (err) {
+        res.status(400)
+        res.json(err)
+    }
+}
+
+export const filter = async (req: express.Request, res: express.Response):Promise<void> => {
+    const min = req.body.min
+    const max = req.body.max
+    const brand = req.body.brand
+    const cat = req.body.cat
+    try {
+        const result = await func.filter(min, max, cat, brand)
+        res.json(result)
+    } catch (err) {
+        res.status(400)
+        res.json(err)
+    }
+}
+
