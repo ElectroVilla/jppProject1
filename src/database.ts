@@ -6,7 +6,7 @@ const {HEROKU_HOST, HEROKU_DB, HEROKU_USER, HEROKU_PASSWORD,
 POSTGRES_HOST, POSTGRES_DB, POSTGRES_TEST_DB, POSTGRES_USER, POSTGRES_PASSWORD, ENV, DATABASE_URL} = process.env
 let client:Pool;
 const environment = parseInt(process.env.ENV as string)
-const en1 = 1 //"dev"
+const en1 = 1 //"dev build"
 const en2 = 2 //"test"
 //psql -U postgres -h localhost -W
 if (environment === 1) {// "dev"
